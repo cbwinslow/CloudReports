@@ -77,3 +77,28 @@ The system is configured through `config.json` which contains settings for all a
 ## Usage
 
 See the [Usage Guide](./usage.md) for detailed instructions on running reports, configuring schedules, and managing collected data.
+
+### Enhanced Capabilities
+
+The system now includes advanced monitoring and integration capabilities:
+
+- **Process Monitoring**: Real-time tracking of system processes and resource usage
+- **Storage Monitoring**: Comprehensive filesystem and storage performance tracking
+- **Grafana Integration**: Seamless visualization dashboard integration
+- **OpenSearch Integration**: Advanced log aggregation and search capabilities
+
+### Running Enhanced Reports
+
+```bash
+# Run all enhanced reports with new capabilities
+./run_all_enhanced_reports.sh
+
+# Run specific enhanced reports
+python3 run_reports_extended.py run-single --type process_monitoring
+python3 run_reports_extended.py run-single --type storage_monitoring
+python3 run_reports_extended.py run-single --type grafana_integration
+python3 run_reports_extended.py run-single --type opensearch_integration
+
+# List all available report types
+python3 run_reports_extended.py list-types
+```

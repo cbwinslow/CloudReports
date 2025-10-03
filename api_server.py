@@ -20,6 +20,28 @@ from functools import wraps
 
 # Configuration
 BASE_DIR = Path("/home/cbwinslow/reports")
+
+# Import new cybersecurity and networking report modules
+from src.reports.network_traffic_analysis import run_network_traffic_analysis
+from src.reports.penetration_test_report import run_penetration_test_reporting
+from src.reports.vulnerability_scan_report import run_vulnerability_scan_reporting
+from src.reports.firewall_ids_report import run_firewall_ids_reporting
+from src.reports.blue_team_report import run_blue_team_reporting
+from src.reports.threat_intelligence_report import run_threat_intelligence_reporting
+from src.reports.compliance_report import run_compliance_reporting
+
+# Import performance and system monitoring modules
+from src.reports.ip_logging_monitoring import run_ip_logging_monitoring
+from src.reports.user_audit_monitoring import run_user_audit_monitoring
+from src.reports.io_performance_monitoring import run_io_performance_monitoring
+from src.reports.gpu_monitoring import run_gpu_monitoring
+from src.reports.cpu_monitoring import run_cpu_monitoring
+from src.reports.system_benchmarking import run_system_benchmarking
+from src.reports.interactive_charting import run_charting_service
+from src.reports.process_monitoring import run_process_monitoring
+from src.reports.storage_monitoring import run_storage_monitoring
+from src.reports.grafana_integration import run_grafana_integration
+from src.reports.opensearch_integration import run_opensearch_integration
 DATA_DIR = BASE_DIR / "data"
 CONFIG_FILE = BASE_DIR / "config.json"
 
@@ -243,6 +265,8 @@ class APIHandler(BaseHTTPRequestHandler):
                     self.handle_health()
                 elif path_parts[2] == 'status':
                     self.handle_status()
+                elif path_parts[2] == 'cybersecurity':
+                    self.handle_cybersecurity(path_parts[3:])
                 else:
                     self.send_error(404)
             else:
@@ -451,6 +475,165 @@ class APIHandler(BaseHTTPRequestHandler):
         }
         
         self.send_json_response(status)
+    
+    def handle_cybersecurity(self, sub_path):
+        """Handle cybersecurity reports endpoint"""
+        if len(sub_path) == 0:
+            # GET /api/v1/cybersecurity - List available cybersecurity and performance reports
+            available_reports = [
+                {"name": "network_traffic", "description": "Network traffic analysis report"},
+                {"name": "penetration_test", "description": "Penetration testing results report"},
+                {"name": "vulnerability_scan", "description": "Vulnerability scan results report"},
+                {"name": "firewall_ids", "description": "Firewall and IDS activity report"},
+                {"name": "blue_team", "description": "Blue team activity report"},
+                {"name": "threat_intelligence", "description": "Threat intelligence report"},
+                {"name": "compliance", "description": "Security compliance report"},
+                {"name": "ip_logging", "description": "IP address logging and network traffic monitoring"},
+                {"name": "user_audit", "description": "User audit and activity monitoring"},
+                {"name": "io_performance", "description": "I/O throughput and performance monitoring"},
+                {"name": "gpu_monitoring", "description": "GPU performance monitoring"},
+                {"name": "cpu_monitoring", "description": "CPU and core performance monitoring"},
+                {"name": "system_benchmarking", "description": "System benchmarking suite"},
+                {"name": "interactive_charting", "description": "Interactive charting with date range selection"},
+                {"name": "process_monitoring", "description": "Process monitoring and performance tracking"},
+                {"name": "storage_monitoring", "description": "Storage and filesystem monitoring"},
+                {"name": "grafana_integration", "description": "Grafana integration and dashboard management"},
+                {"name": "opensearch_integration", "description": "OpenSearch integration and log aggregation"}
+            ]
+            
+            self.send_json_response({"data": available_reports})
+            
+        elif len(sub_path) == 1:
+            report_type = sub_path[0]
+            
+            if report_type == "network_traffic":
+                try:
+                    report = run_network_traffic_analysis()
+                    self.send_json_response({"type": "network_traffic", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating network traffic report: {str(e)}")
+                    
+            elif report_type == "penetration_test":
+                try:
+                    report = run_penetration_test_reporting()
+                    self.send_json_response({"type": "penetration_test", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating penetration test report: {str(e)}")
+                    
+            elif report_type == "vulnerability_scan":
+                try:
+                    report = run_vulnerability_scan_reporting()
+                    self.send_json_response({"type": "vulnerability_scan", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating vulnerability scan report: {str(e)}")
+                    
+            elif report_type == "firewall_ids":
+                try:
+                    report = run_firewall_ids_reporting()
+                    self.send_json_response({"type": "firewall_ids", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating firewall/IDS report: {str(e)}")
+                    
+            elif report_type == "blue_team":
+                try:
+                    report = run_blue_team_reporting()
+                    self.send_json_response({"type": "blue_team", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating blue team report: {str(e)}")
+                    
+            elif report_type == "threat_intelligence":
+                try:
+                    report = run_threat_intelligence_reporting()
+                    self.send_json_response({"type": "threat_intelligence", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating threat intelligence report: {str(e)}")
+                    
+            elif report_type == "compliance":
+                try:
+                    report = run_compliance_reporting()
+                    self.send_json_response({"type": "compliance", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating compliance report: {str(e)}")
+                    
+            elif report_type == "ip_logging":
+                try:
+                    report = run_ip_logging_monitoring()
+                    self.send_json_response({"type": "ip_logging", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating IP logging report: {str(e)}")
+                    
+            elif report_type == "user_audit":
+                try:
+                    report = run_user_audit_monitoring()
+                    self.send_json_response({"type": "user_audit", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating user audit report: {str(e)}")
+                    
+            elif report_type == "io_performance":
+                try:
+                    report = run_io_performance_monitoring()
+                    self.send_json_response({"type": "io_performance", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating I/O performance report: {str(e)}")
+                    
+            elif report_type == "gpu_monitoring":
+                try:
+                    report = run_gpu_monitoring()
+                    self.send_json_response({"type": "gpu_monitoring", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating GPU monitoring report: {str(e)}")
+                    
+            elif report_type == "cpu_monitoring":
+                try:
+                    report = run_cpu_monitoring()
+                    self.send_json_response({"type": "cpu_monitoring", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating CPU monitoring report: {str(e)}")
+                    
+            elif report_type == "system_benchmarking":
+                try:
+                    report = run_system_benchmarking()
+                    self.send_json_response({"type": "system_benchmarking", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating system benchmarking report: {str(e)}")
+                    
+            elif report_type == "interactive_charting":
+                try:
+                    report = run_charting_service()
+                    self.send_json_response({"type": "interactive_charting", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating interactive charting report: {str(e)}")
+                    
+            elif report_type == "process_monitoring":
+                try:
+                    report = run_process_monitoring()
+                    self.send_json_response({"type": "process_monitoring", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating process monitoring report: {str(e)}")
+                    
+            elif report_type == "storage_monitoring":
+                try:
+                    report = run_storage_monitoring()
+                    self.send_json_response({"type": "storage_monitoring", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating storage monitoring report: {str(e)}")
+                    
+            elif report_type == "grafana_integration":
+                try:
+                    report = run_grafana_integration()
+                    self.send_json_response({"type": "grafana_integration", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating Grafana integration report: {str(e)}")
+                    
+            elif report_type == "opensearch_integration":
+                try:
+                    report = run_opensearch_integration()
+                    self.send_json_response({"type": "opensearch_integration", "data": report})
+                except Exception as e:
+                    self.send_error(500, f"Error generating OpenSearch integration report: {str(e)}")
+                    
+            else:
+                self.send_error(404, "Cybersecurity report type not found")
     
     def send_json_response(self, data):
         """Send JSON response"""
