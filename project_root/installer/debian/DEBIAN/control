@@ -1,0 +1,24 @@
+Package: enterprise-reporting-system
+Version: 1.0.0
+Section: utils
+Priority: optional
+Architecture: all
+Depends: python3, python3-pip, python3-venv, openssh-client, curl, jq
+Maintainer: Your Name <your.email@example.com>
+Description: Enterprise Reporting System - Comprehensive monitoring and reporting solution
+ The Enterprise Reporting System provides a comprehensive solution for
+ monitoring, collecting, and reporting system metrics, logs, and operational
+ data. It features remote collection capabilities, integration with monitoring
+ tools like Prometheus and Grafana, web-based visualization, and enterprise
+ security features including role-based access control and audit logging.
+ .
+ Features:
+ * Multi-source data collection (system metrics, network, filesystem, etc.)
+ * Centralized configuration management
+ * Remote server monitoring via SSH
+ * Integration with popular monitoring tools
+ * Enterprise security with RBAC and audit trails
+ * Scalable architecture supporting thousands of endpoints
+ * RESTful API for programmatic access
+ * Web-based dashboard for report visualization
+ * Compliance reporting modules

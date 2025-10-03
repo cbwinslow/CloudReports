@@ -1,0 +1,81 @@
+name: Security Scanning
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run weekly security scans
+    - cron: '0 2 * * 1'
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install security scanning tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install bandit safety semgrep pip-audit
+
+    - name: Run Bandit security scan
+      run: |
+        bandit -r src/ -f json -o bandit-report.json || echo "Bandit scan completed with findings"
+        if [ -f bandit-report.json ]; then
+          echo "Bandit scan report generated"
+        fi
+
+    - name: Run pip-audit for vulnerable dependencies
+      run: |
+        pip-audit --format=json --output=pip-audit-report.json || echo "pip-audit scan completed with findings"
+        if [ -f pip-audit-report.json ]; then
+          echo "pip-audit report generated"
+        fi
+
+    - name: Run Semgrep security scan
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: >-
+          p/security-audit
+          p/secrets
+          p/python
+        output-format: sarif
+        output-file: semgrep-results.sarif
+
+    - name: Upload security scan results
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-scan-results-${{ github.sha }}
+        path: |
+          bandit-report.json
+          pip-audit-report.json
+          semgrep-results.sarif
+
+    - name: Check for critical security issues
+      run: |
+        # Check Bandit results for high severity issues
+        if [ -f bandit-report.json ]; then
+          HIGH_ISSUES=$(jq -r '.results[] | select(.issue_severity=="HIGH") | .filename, .issue_text' bandit-report.json 2>/dev/null | wc -l)
+          if [ "$HIGH_ISSUES" -gt 0 ]; then
+            echo "::warning::Bandit found $HIGH_ISSUES high severity issues"
+          fi
+        fi
+        
+        # Check pip-audit results
+        if [ -f pip-audit-report.json ]; then
+          CRITICAL_VULNS=$(jq -r '.vulnerabilities[] | select(.aliases[].type=="cve") | .aliases[]' pip-audit-report.json 2>/dev/null | wc -l)
+          if [ "$CRITICAL_VULNS" -gt 0 ]; then
+            echo "::warning::pip-audit found $CRITICAL_VULNS critical vulnerabilities"
+          fi
+        fi

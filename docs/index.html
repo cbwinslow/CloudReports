@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Reporting System - Documentation</title>
+    <meta name="description" content="Comprehensive documentation for the Enterprise Reporting System">
+    <link rel="stylesheet" href="theme/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- For search functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    Enterprise Reporting
+                </h1>
+            </div>
+            
+            <div class="docsearch">
+                <div class="search-box">
+                    <input type="text" placeholder="Search documentation...">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Overview</a></li>
+                <li><a href="architecture.html">Architecture</a></li>
+                <li><a href="installation.html">Installation</a></li>
+                <li><a href="configuration.html">Configuration</a></li>
+                <li><a href="usage.html">Usage</a></li>
+                <li><a href="integrations.html">Integrations</a></li>
+                <li><a href="api.html">API Reference</a></li>
+                <li><a href="security.html">Security</a></li>
+                <li><a href="deployment.html">Deployment</a></li>
+                <li><a href="monitoring.html">Monitoring</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                <li><a href="compliance.html">Compliance</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <article class="article">
+                <h1>Enterprise Reporting System Documentation</h1>
+                
+                <p>The Enterprise Reporting System is a comprehensive solution for collecting, analyzing, and reporting system metrics, logs, and operational data. It provides both local and remote collection capabilities with centralized configuration and data storage, designed for enterprise environments requiring scalability, security, and compliance.</p>
+                
+                <div class="alert alert-info">
+                    <p><strong>Tip:</strong> New to the system? Start with the <a href="installation.html">Installation Guide</a> to get up and running quickly.</p>
+                </div>
+                
+                <h2>Key Features</h2>
+                
+                <ul>
+                    <li><strong>Multi-source data collection</strong>: System metrics, network, filesystem, logs, containers, and more</li>
+                    <li><strong>Centralized configuration management</strong>: Single configuration point for all system settings</li>
+                    <li><strong>Remote server monitoring</strong>: Monitor systems across your infrastructure via SSH</li>
+                    <li><strong>Integration ecosystem</strong>: Connect with Prometheus, Grafana, Loki, and other tools</li>
+                    <li><strong>Enterprise security</strong>: Encrypted storage, secure credential management, and audit trails</li>
+                    <li><strong>Scalable architecture</strong>: Designed to handle thousands of endpoints</li>
+                    <li><strong>Comprehensive API</strong>: RESTful API for programmatic access</li>
+                    <li><strong>Compliance ready</strong>: Built-in support for SOX, HIPAA, GDPR, and ISO 27001</li>
+                </ul>
+                
+                <h2>Architecture Overview</h2>
+                
+                <p>The system follows a modular, microservices-inspired architecture:</p>
+                
+                <pre><code>┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Monitoring    │    │   Collection     │    │   Processing    │
+│   Interface     │◄──►│   Framework      │◄──►│   Pipeline      │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         ▲                        ▲                       ▲
+         │                        │                       │
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Grafana/      │    │   Remote         │    │   Storage &     │
+│   Visualization │    │   Collection     │    │   Export        │
+└─────────────────┘    └──────────────────┘    └─────────────────┘</code></pre>
+                
+                <h2>Quick Start</h2>
+                
+                <p>Get started with the Enterprise Reporting System in minutes:</p>
+                
+                <ol>
+                    <li>Clone the repository:
+                        <pre><code>git clone https://github.com/your-org/enterprise-reporting.git ~/reports</code></pre>
+                    </li>
+                    <li>Set up the system:
+                        <pre><code>cd ~/reports
+chmod +x *.sh */*.sh */*/*.sh</code></pre>
+                    </li>
+                    <li>Configure the system:
+                        <pre><code>cp config.example.json config.json
+# Edit config.json with appropriate settings
+vim config.json</code></pre>
+                    </li>
+                    <li>Run initial reports:
+                        <pre><code>./run_reports.sh full</code></pre>
+                    </li>
+                </ol>
+                
+                <h2>Documentation Structure</h2>
+                
+                <p>This documentation is organized into several sections:</p>
+                
+                <ul>
+                    <li><strong>Getting Started</strong>: Installation, configuration, and basic usage</li>
+                    <li><strong>Architecture</strong>: System design and component interactions</li>
+                    <li><strong>Integration</strong>: Connecting with Prometheus, Grafana, and other tools</li>
+                    <li><strong>Deployment</strong>: Production deployment guides and best practices</li>
+                    <li><strong>Security</strong>: Security configuration and best practices</li>
+                    <li><strong>API Reference</strong>: Complete API documentation</li>
+                    <li><strong>Compliance</strong>: Regulatory compliance guidance</li>
+                    <li><strong>Troubleshooting</strong>: Common issues and solutions</li>
+                </ul>
+                
+                <h2>Enterprise Support</h2>
+                
+                <p>For enterprise deployments, we offer:</p>
+                
+                <ul>
+                    <li>Professional services for complex deployments</li>
+                    <li>Priority support and SLA options</li>
+                    <li>Custom development and integration services</li>
+                    <li>Security and compliance consulting</li>
+                    <li>Training and certification programs</li>
+                </ul>
+                
+                <div class="alert alert-warning">
+                    <p><strong>Warning:</strong> This system handles sensitive system data. Follow security best practices and ensure proper access controls are in place.</p>
+                </div>
+                
+                <h2>Next Steps</h2>
+                
+                <p>Continue with one of these guides:</p>
+                
+                <ul>
+                    <li><a href="installation.html">Installation Guide</a> - Set up the system</li>
+                    <li><a href="architecture.html">Architecture Guide</a> - Understand the system design</li>
+                    <li><a href="configuration.html">Configuration Guide</a> - Configure for your environment</li>
+                    <li><a href="security.html">Security Guide</a> - Secure your deployment</li>
+                </ul>
+                
+                <div class="footer">
+                    <p>© 2025 Enterprise Reporting System. All rights reserved.</p>
+                    <p>Last updated: <time datetime="2025-01-01">January 1, 2025</time></p>
+                </div>
+            </article>
+        </main>
+    </div>
+    
+    <script src="theme/js/scripts.js"></script>
+</body>
+</html>

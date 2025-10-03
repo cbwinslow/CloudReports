@@ -1,0 +1,85 @@
+# Enterprise Reporting System - Complete Requirements
+
+# Core dependencies
+cryptography>=3.4.8
+requests>=2.25.1
+pyyaml>=6.0
+jinja2>=3.0.0
+click>=8.0.0
+
+# API dependencies
+fastapi>=0.68.0
+uvicorn>=0.15.0
+pydantic>=1.8.0
+
+# Database dependencies
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+pymysql>=1.0.0
+aiopg>=1.4.0
+asyncpg>=0.27.0
+
+# Redis dependencies
+redis>=4.0.0
+aioredis>=2.0.0
+
+# Monitoring integration dependencies
+prometheus-client>=0.11.0
+elasticsearch>=7.13.0
+
+# Machine Learning dependencies
+scikit-learn>=1.2.0
+numpy>=1.24.0
+pandas>=1.5.0
+scipy>=1.10.0
+
+# Web interface dependencies
+flask>=2.0.0
+gunicorn>=20.1.0
+aiohttp>=3.8.0
+websockets>=10.0
+
+# Authentication dependencies
+pyotp>=2.6.0
+qrcode[pil]>=7.3.1
+python-jose[cryptography]>=3.3.0
+passlib>=1.7.4
+bcrypt>=3.2.0
+
+# Security dependencies
+bandit>=1.7.0
+safety>=2.3.0
+semgrep>=1.0.0
+pip-audit>=0.4.0
+
+# Performance monitoring dependencies
+psutil>=5.9.0
+cProfile>=1.0.0
+line-profiler>=4.0.0
+memory-profiler>=0.61.0
+objgraph>=3.5.0
+pympler>=1.0.1
+yappi>=1.4.0
+
+# Task queue dependencies
+celery>=5.2.0
+
+# Development dependencies
+pytest>=6.0
+pytest-cov
+black
+flake8
+mypy
+isort
+pre-commit
+
+# Container dependencies
+docker>=5.0.0
+docker-compose>=1.29.0
+
+# Additional dependencies
+hvac>=0.11.2  # HashiCorp Vault client
+boto3>=1.20.0  # AWS SDK for KMS integration
+aiofiles>=0.8.0  # Async file operations
+joblib>=1.2.0  # Model persistence
+secrets>=1.0.0  # Secure secret generation

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Reporting System Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-section">
+                <h1><i class="fas fa-chart-bar"></i> Enterprise Reports</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-view="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-view="reports"><i class="fas fa-file-alt"></i> Reports</a></li>
+                    <li><a href="#" class="nav-link" data-view="systems"><i class="fas fa-server"></i> Systems</a></li>
+                    <li><a href="#" class="nav-link" data-view="network"><i class="fas fa-network-wired"></i> Network</a></li>
+                    <li><a href="#" class="nav-link" data-view="filesystem"><i class="fas fa-hdd"></i> Filesystem</a></li>
+                    <li><a href="#" class="nav-link" data-view="security"><i class="fas fa-shield-alt"></i> Security</a></li>
+                    <li><a href="#" class="nav-link" data-view="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-left">
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search reports...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="user-menu">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view active">
+                <div class="dashboard-grid">
+                    <!-- Summary Cards -->
+                    <div class="card summary-card">
+                        <div class="card-icon bg-blue">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 id="total-systems">0</h3>
+                            <p>Monitored Systems</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon bg-green">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 id="total-reports">0</h3>
+                            <p>Reports Collected</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon bg-yellow">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 id="total-alerts">0</h3>
+                            <p>Active Alerts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon bg-red">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 id="success-rate">0%</h3>
+                            <p>Collection Success Rate</p>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="card chart-card col-span-2">
+                        <h3>System Performance</h3>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+
+                    <div class="card chart-card">
+                        <h3>Collection Status</h3>
+                        <canvas id="statusChart"></canvas>
+                    </div>
+
+                    <div class="card chart-card">
+                        <h3>System Types</h3>
+                        <canvas id="systemTypesChart"></canvas>
+                    </div>
+
+                    <!-- Recent Reports -->
+                    <div class="card reports-card col-span-2">
+                        <h3>Recent Reports</h3>
+                        <div class="reports-list" id="recent-reports">
+                            <!-- Reports will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports View -->
+            <div id="reports-view" class="view">
+                <div class="reports-controls">
+                    <div class="filter-controls">
+                        <select id="report-type-filter">
+                            <option value="all">All Types</option>
+                            <option value="system">System</option>
+                            <option value="network">Network</option>
+                            <option value="filesystem">Filesystem</option>
+                            <option value="error">Error</option>
+                            <option value="log">Log</option>
+                            <option value="container">Container</option>
+                        </select>
+                        <select id="time-range-filter">
+                            <option value="last24h">Last 24 Hours</option>
+                            <option value="last7d">Last 7 Days</option>
+                            <option value="last30d">Last 30 Days</option>
+                        </select>
+                        <button id="refresh-reports"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid" id="reports-grid">
+                    <!-- Reports will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Systems View -->
+            <div id="systems-view" class="view">
+                <div class="systems-grid" id="systems-grid">
+                    <!-- Systems will be populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

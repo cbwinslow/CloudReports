@@ -1,0 +1,9 @@
+# Real-Time Dashboard-specific dependencies
+aiohttp>=3.8.0
+websockets>=10.0
+jinja2>=3.0.0
+aiofiles>=0.8.0
+redis>=4.0.0
+prometheus-client>=0.11.0
+plotly>=5.0.0
+dash>=2.0.0

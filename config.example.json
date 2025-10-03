@@ -1,0 +1,89 @@
+{
+  "general": {
+    "output_dir": "/home/cbwinslow/reports/data",
+    "retention_days": 30,
+    "compression": true,
+    "verbose": true
+  },
+  "report_types": {
+    "system": {
+      "enabled": true,
+      "schedule": "daily",
+      "scripts": ["system_info.sh"]
+    },
+    "network": {
+      "enabled": true,
+      "schedule": "hourly",
+      "scripts": ["network_info.sh"]
+    },
+    "filesystem": {
+      "enabled": true,
+      "schedule": "daily",
+      "scripts": ["filesystem_info.sh"]
+    },
+    "error": {
+      "enabled": true,
+      "schedule": "continuous",
+      "scripts": ["error_info.sh"]
+    },
+    "log": {
+      "enabled": true,
+      "schedule": "hourly",
+      "scripts": ["log_info.sh"]
+    },
+    "container": {
+      "enabled": true,
+      "schedule": "hourly",
+      "scripts": ["container_info.sh"]
+    },
+    "security": {
+      "enabled": true,
+      "schedule": "daily",
+      "scripts": ["security_info.sh"]
+    },
+    "process": {
+      "enabled": true,
+      "schedule": "hourly",
+      "scripts": ["process_info.sh"]
+    },
+    "hardware": {
+      "enabled": true,
+      "schedule": "weekly",
+      "scripts": ["hardware_info.sh"]
+    },
+    "backup": {
+      "enabled": true,
+      "schedule": "daily",
+      "scripts": ["backup_info.sh"]
+    },
+    "monitoring": {
+      "enabled": true,
+      "schedule": "hourly",
+      "scripts": ["monitoring_info.sh"]
+    }
+  },
+  "remote_servers": {
+    "enabled": false,
+    "servers": [
+      {
+        "name": "example-server-1",
+        "host": "server1.example.com",
+        "port": 22,
+        "user": "username",
+        "ssh_key": "/home/cbwinslow/.ssh/id_rsa"
+      },
+      {
+        "name": "example-server-2",
+        "host": "server2.example.com",
+        "port": 22,
+        "user": "username",
+        "ssh_key": "/home/cbwinslow/.ssh/id_rsa"
+      }
+    ]
+  },
+  "notifications": {
+    "enabled": false,
+    "email": "",
+    "webhook": ""
+  }
+}

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  reports-api:
+    build: .
+    container_name: reports-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - reports-data:/app/data
+      - reports-config:/app/config
+    environment:
+      - REPORTS_API_PORT=8080
+      - REPORTS_RETENTION_DAYS=30
+    restart: unless-stopped
+    networks:
+      - reports-net
+
+  reports-web:
+    build: .
+    container_name: reports-web
+    ports:
+      - "8081:8081"
+    volumes:
+      - reports-data:/app/data
+      - reports-config:/app/config
+    environment:
+      - REPORTS_WEB_PORT=8081
+    restart: unless-stopped
+    networks:
+      - reports-net
+    depends_on:
+      - reports-api
+
+volumes:
+  reports-data:
+  reports-config:
+
+networks:
+  reports-net:
+    driver: bridge

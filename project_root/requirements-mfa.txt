@@ -1,0 +1,5 @@
+# MFA-specific dependencies
+pyotp>=2.6.0
+qrcode[pil]>=7.3.1
+cryptography>=3.4.8
+pillow>=9.0.0

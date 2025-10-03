@@ -1,0 +1,276 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Enterprise Reporting System Overview",
+    "tags": ["reports", "infrastructure", "monitoring"],
+    "style": "dark",
+    "timezone": "browser",
+    "refresh": "1m",
+    "schemaVersion": 27,
+    "version": 0,
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
+    },
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "hide": 0,
+          "includeAll": true,
+          "label": "Host",
+          "multi": true,
+          "name": "hostname",
+          "options": [],
+          "query": "label_values(reports_system_cpu_usage_percent, hostname)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "System CPU Usage",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "reports_system_cpu_usage_percent",
+            "legendFormat": "{{hostname}}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          },
+          "legend": {
+            "calcs": ["mean", "lastNotNull", "max", "min"],
+            "displayMode": "table",
+            "placement": "bottom"
+          }
+        },
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 80,
+            "visible": true
+          },
+          {
+            "colorMode": "warning",
+            "op": "gt",
+            "value": 60,
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "System Memory Usage",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "targets": [
+          {
+            "expr": "reports_system_memory_usage_percent",
+            "legendFormat": "{{hostname}}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          },
+          "legend": {
+            "calcs": ["mean", "lastNotNull", "max", "min"],
+            "displayMode": "table",
+            "placement": "bottom"
+          }
+        },
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 85,
+            "visible": true
+          },
+          {
+            "colorMode": "warning",
+            "op": "gt",
+            "value": 70,
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Filesystem Usage",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+        "targets": [
+          {
+            "expr": "reports_filesystem_usage_percent",
+            "legendFormat": "{{hostname}}:{{mount_point}}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 90,
+            "visible": true
+          },
+          {
+            "colorMode": "warning",
+            "op": "gt",
+            "value": 80,
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Collection Success Rate",
+        "type": "stat",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+        "targets": [
+          {
+            "expr": "sum(increase(reports_collection_success_total[1h])) / (sum(increase(reports_collection_success_total[1h])) + sum(increase(reports_collection_failure_total[1h]))) * 100",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 80
+                },
+                {
+                  "color": "green",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          }
+        },
+        "valueMappings": [
+          {
+            "options": {
+              "match": "null",
+              "result": {
+                "text": "N/A"
+              }
+            },
+            "type": "special"
+          }
+        ],
+        "format": "percent",
+        "valueName": "current",
+        "calcs": ["lastNotNull"]
+      },
+      {
+        "id": 5,
+        "title": "Recent System Reports",
+        "type": "table",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+        "targets": [
+          {
+            "expr": "reports_system_cpu_usage_percent",
+            "format": "table",
+            "instant": true,
+            "refId": "A"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "__name__": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "hostname": "Hostname",
+                "Value": "CPU %"
+              }
+            }
+          }
+        ],
+        "options": {
+          "showHeader": true
+        }
+      },
+      {
+        "id": 6,
+        "title": "Collection Performance",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16},
+        "targets": [
+          {
+            "expr": "reports_collection_duration_seconds",
+            "legendFormat": "{{hostname}} - {{report_type}}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        }
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 27,
+    "version": 1
+  },
+  "folderId": 0,
+  "overwrite": false
+}

@@ -1,0 +1,16 @@
+# Performance Monitoring-specific dependencies
+psutil>=5.9.0
+cProfile>=1.0.0
+line-profiler>=4.0.0
+memory-profiler>=0.61.0
+objgraph>=3.5.0
+pympler>=1.0.1
+yappi>=1.4.0
+prometheus-client>=0.15.0
+aiopg>=1.4.0
+asyncpg>=0.27.0
+SQLAlchemy>=2.0.0
+psycopg2-binary>=2.9.5
+aioredis>=2.0.0
+pandas>=1.5.0
+numpy>=1.24.0

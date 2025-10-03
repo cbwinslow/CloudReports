@@ -1,0 +1,121 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enterprise-reporting-system"
+version = "1.0.0"
+description = "A comprehensive enterprise reporting system for monitoring and analytics"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities"
+]
+dependencies = [
+    "cryptography>=3.4.8",
+    "requests>=2.25.1",
+    "pyyaml>=6.0",
+    "jinja2>=3.0.0",
+    "click>=8.0.0",
+    "fastapi>=0.68.0",
+    "uvicorn>=0.15.0",
+    "pydantic>=1.8.0",
+    "sqlalchemy>=1.4.0",
+    "psycopg2-binary>=2.9.0",
+    "elasticsearch>=7.13.0",
+    "prometheus-client>=0.11.0",
+    "aioredis>=2.0.0",
+    "asyncpg>=0.27.0",
+    "celery>=5.2.0",
+    "redis>=4.0.0"
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov",
+    "black",
+    "flake8",
+    "mypy",
+    "isort",
+    "pre-commit"
+]
+docker = [
+    "docker>=5.0.0",
+    "docker-compose>=1.29.0"
+]
+
+[project.scripts]
+reports = "reports.cli:main"
+reports-api = "reports.api_server:main"
+reports-web = "reports.web_server:main"
+reports-init = "reports.init:main"
+reports-diagnose = "reports.diagnose:main"
+
+[project.urls]
+Homepage = "https://github.com/your-org/enterprise-reporting"
+Documentation = "https://enterprise-reporting.readthedocs.io"
+Repository = "https://github.com/your-org/enterprise-reporting.git"
+Changelog = "https://github.com/your-org/enterprise-reporting/releases"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["reports*"]
+
+[tool.setuptools.package-data]
+reports = ["*.md", "templates/**/*", "static/**/*", "web/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+    "--tb=short"
+]
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:"
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
