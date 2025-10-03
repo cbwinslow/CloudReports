@@ -792,8 +792,8 @@ alert_integration_config = {
             "slack": {
                 "enabled": True,
                 "webhook_urls": {
-                    "alerts": "YOUR_SLACK_WEBHOOK_URL",
-                    "incidents": "YOUR_SLACK_WEBHOOK_URL"
+                    "alerts": "YOUR_SLACK_WEBHOOK_URL_ALERTS",
+                    "incidents": "YOUR_SLACK_WEBHOOK_URL_INCIDENTS"
                 }
             },
             "pagerduty": {

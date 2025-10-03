@@ -677,7 +677,7 @@ else
     # Add alerting logic here
     # Example: curl -X POST -H "Content-Type: application/json" \
     #    -d '{"text":"Reports API is unhealthy"}' \
-    #    https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK
+    #    YOUR_SLACK_WEBHOOK_URL
 fi
 
 # Check disk space

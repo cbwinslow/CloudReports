@@ -92,7 +92,7 @@ Configure alerts in `config.json`:
       },
       "slack": {
         "enabled": false,
-        "webhook_url": "https://hooks.slack.com/services/..."
+        "webhook_url": "YOUR_SLACK_WEBHOOK_URL"
       }
     },
     "rules": [

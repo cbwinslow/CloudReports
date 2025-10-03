@@ -506,9 +506,9 @@ notification_config = {
         "slack": {
             "enabled": True,
             "webhook_urls": {
-                "alerts": "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
-                "performance": "https://hooks.slack.com/services/YOUR/SLACK/PERFORMANCE",
-                "operations": "https://hooks.slack.com/services/YOUR/SLACK/OPERATIONS"
+                "alerts": "YOUR_SLACK_WEBHOOK_URL_ALERTS",
+                "performance": "YOUR_SLACK_WEBHOOK_URL_PERFORMANCE",
+                "operations": "YOUR_SLACK_WEBHOOK_URL_OPERATIONS"
             },
             "channel_mappings": {
                 "critical": "#alerts-critical",

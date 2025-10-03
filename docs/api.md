@@ -386,7 +386,7 @@ Configure webhooks in `config.json`:
   "webhooks": [
     {
       "id": "slack-alerts",
-      "url": "https://hooks.slack.com/services/...",
+      "url": "YOUR_SLACK_WEBHOOK_URL",
       "events": ["report_failure", "system_down"],
       "secret": "webhook-signing-secret"
     }
